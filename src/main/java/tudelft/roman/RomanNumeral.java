@@ -1,6 +1,7 @@
 package tudelft.roman;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class RomanNumeral {
@@ -33,5 +34,28 @@ public class RomanNumeral {
 
         return convertedNumber;
 
+    }
+
+    public int convert2(String s) {
+        int temp = 0;
+        int result = 0;
+        s = s.toUpperCase(Locale.ROOT);
+        for (int i = 0; i < s.length(); i++) {
+            int currInt = map.get(s.charAt(i));
+            int nextInt = 0;
+            if (i < s.length() - 1 )
+                nextInt = map.get(s.charAt(i + 1));
+
+
+            if (currInt < nextInt) {
+                temp = nextInt - currInt;
+                i++;
+            } else {
+                temp = currInt;
+            }
+            result += temp;
+        }
+
+        return result;
     }
 }
